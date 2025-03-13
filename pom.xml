@@ -61,7 +61,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                co.edu.uniquindio.poo.gestionhospitalaria/co.edu.uniquindio.poo.gestionhospitalaria.HelloApplication
+                                co.edu.uniquindio.poo.gestionhospitalaria/co.edu.uniquindio.poo.gestionhospitalaria.App
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>

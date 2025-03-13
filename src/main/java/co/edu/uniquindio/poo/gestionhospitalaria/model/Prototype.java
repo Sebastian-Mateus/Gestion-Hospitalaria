@@ -1,6 +1,7 @@
 package co.edu.uniquindio.poo.gestionhospitalaria.model;
 
-public interface CloneablePatient extends Cloneable{
+public interface Prototype {
 
+ Prototype clone();
     
 }
