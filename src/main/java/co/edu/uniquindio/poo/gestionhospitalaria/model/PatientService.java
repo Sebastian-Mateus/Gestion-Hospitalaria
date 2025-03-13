@@ -21,13 +21,6 @@ public class PatientService {
         }
     }
 
-    public void loadHardcodedData() {
-        boolean patient1 = createPatient("Juan Perez", "1034", "juan.perez@example.com", "password123", 30);
-
-        boolean patient2 = createPatient("Maria Lopez", "1035", "maria.lopez@example.com", "password456", 25);
-
-
-    }
 
     private void savePatient(Patient patient) {
         patientsList.add(patient);

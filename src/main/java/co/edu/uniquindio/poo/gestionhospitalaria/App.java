@@ -60,12 +60,18 @@ public class App extends Application {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("PatientServiceView.fxml"));
             Parent root = loader.load();
             patientServiceViewController = loader.getController();
+            if (patientServiceViewController == null) {
+                System.out.println("❌ Error: patientServiceViewController es null");
+            }else {
+                System.out.println(" patientServiceViewController no es null");
+            }
             patientServiceViewController.setApp(this);
             patientServiceViewController.setPatient(patient);
 
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);
         }catch(IOException e){
+            System.out.println("❌ Error al cargar el FXML:");
             e.printStackTrace();
         }
     }

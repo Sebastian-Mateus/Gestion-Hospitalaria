@@ -36,6 +36,7 @@
                                     <Font size="16.0" />
                                  </font>
                               </Text>
+                              <Button layoutX="529.0" layoutY="14.0" mnemonicParsing="false" onAction="#logOut" style="-fx-background-color: #f1948a;" text="Salir" />
                            </children>
                         </AnchorPane>
                      </top>

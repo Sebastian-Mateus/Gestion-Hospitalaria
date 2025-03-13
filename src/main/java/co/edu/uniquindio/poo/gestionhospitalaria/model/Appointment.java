@@ -2,6 +2,7 @@ package co.edu.uniquindio.poo.gestionhospitalaria.model;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Objects;
 
 public class Appointment {
     private LocalDate date;
@@ -20,6 +21,7 @@ public class Appointment {
         this.status = null;
 
     }
+
 
     public AppointmentStatus getStatus() {
         return status;

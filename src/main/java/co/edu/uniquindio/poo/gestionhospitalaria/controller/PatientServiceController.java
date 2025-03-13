@@ -23,7 +23,12 @@ public class PatientServiceController {
     public AppointmentService getAppointmentService() {
         return appointmentService;
     }
-
+    public void payAppointment(Appointment appointment) {
+        appointmentService.paidAppointment(appointment);
+    }
+    public void completeAppointment(Appointment appointment, AppointmentStatus status) {
+        appointmentService.completeAppointment(appointment, status);
+    }
     public void setAppointmentService(AppointmentService appointmentService) {
         this.appointmentService = appointmentService;
     }

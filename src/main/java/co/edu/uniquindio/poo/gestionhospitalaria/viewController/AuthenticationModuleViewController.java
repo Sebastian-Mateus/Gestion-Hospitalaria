@@ -24,6 +24,8 @@ public class AuthenticationModuleViewController {
         authenticationModuleController = new AuthenticationModuleController(app.hospital);
     }
 
+
+    @FXML
     public void login(ActionEvent event) {
         String userId = usertxt.getText();
         String password = passwordTxt.getText();
@@ -32,10 +34,9 @@ public class AuthenticationModuleViewController {
         Person user = authenticationModuleController.authenticate(userId, password);
 
         if (user != null) {
-            if (user instanceof Patient) {
+            if (user instanceof Patient patient) {
                 // Usuario es un paciente, cargar la vista de paciente
-
-                app.openPatientServiceView((Patient) user);
+                app.openPatientServiceView(patient);
                 System.out.println("Paciente encontrado");
             } else {
                 // Usuario es un doctor, cargar la vista de doctor

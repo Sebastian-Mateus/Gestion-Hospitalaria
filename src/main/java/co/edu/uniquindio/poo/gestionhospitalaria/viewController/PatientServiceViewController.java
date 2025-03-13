@@ -79,6 +79,12 @@ public class PatientServiceViewController {
     @FXML
     private void initialize() {
         patientServiceController = new PatientServiceController(app.hospital);
+
+    }
+
+    @FXML
+    void logOut(ActionEvent event) {
+        app.openAuthenticationModule();
     }
 
     @FXML
@@ -132,7 +138,7 @@ public class PatientServiceViewController {
         void cancelAppointmet(ActionEvent event) {
             Appointment selectedAppointment = appointmentsTable.getSelectionModel().getSelectedItem();
             if (selectedAppointment != null) {
-                patientServiceController.getAppointmentService().completeAppointment(selectedAppointment, AppointmentStatus.CANCELED);
+                patientServiceController.completeAppointment(selectedAppointment, AppointmentStatus.CANCELED);
                 updateTable(event);
             } else {
                 showAlert("Atención", "No se ha seleccionado ninguna cita.", Alert.AlertType.WARNING);
@@ -145,8 +151,13 @@ public class PatientServiceViewController {
         void payAppointmet(ActionEvent event) {
             Appointment selectedAppointment = appointmentsTable.getSelectionModel().getSelectedItem();
             if (selectedAppointment != null) {
-                selectedAppointment.setStatus(AppointmentStatus.BOOKED);
-                appointmentsTable.refresh(); // Refrescar la tabla para reflejar el cambio
+                if (selectedAppointment.getStatus() == AppointmentStatus.CANCELED) {
+                    showAlert("Atención", "No puede pagar una cita cancelada.", Alert.AlertType.WARNING);
+                }else{
+                    patientServiceController.payAppointment(selectedAppointment);
+                    updateTable(event); // Refrescar la tabla para reflejar el cambio
+                }
+
             } else {
                 showAlert("Atención", "No se ha seleccionado ninguna cita.", Alert.AlertType.WARNING);
             }
@@ -154,9 +165,12 @@ public class PatientServiceViewController {
 
         @FXML
         void updateTable(ActionEvent event) {
-            appointments.setAll(patient.getAppointments());
+            loadAppointments();
+            //appointments.setAll(patient.getAppointments());
             appointmentsTable.refresh();
+
         }
+
 
         public void loadInfo(){
             idTxt.setText(patient.getId());
@@ -174,10 +188,10 @@ public class PatientServiceViewController {
 
             startHour.setCellValueFactory(cellData ->
                     new SimpleStringProperty(cellData.getValue().getStartTime() + " - " + cellData.getValue().getEndTime()));
-            stateAppointment.setCellValueFactory(new PropertyValueFactory<>("state"));
+            stateAppointment.setCellValueFactory(new PropertyValueFactory<>("status"));
 
             // Cargar la lista de citas en la tabla
-            appointmentsTable.setItems(appointments);
+            appointmentsTable.getItems().setAll(appointments);
         }
 
 
@@ -190,6 +204,7 @@ public class PatientServiceViewController {
         public void setPatient(Patient patient) {
             this.patient = patient;
             this.appointments = FXCollections.observableList(patient.getAppointments());
+            loadInfo();
         }
 
     private void showAlert(String title, String message, Alert.AlertType alertType) {

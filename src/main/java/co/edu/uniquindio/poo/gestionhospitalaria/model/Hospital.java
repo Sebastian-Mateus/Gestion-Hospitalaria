@@ -21,10 +21,11 @@ public class Hospital {
     }
 
     public void loadData(){
-        System.out.println(patientService.createPatient("Juan Perez", "1034","juan@uqvirtual","1234,",23));
+        System.out.println(patientService.createPatient("Juan Perez", "1034","juan@uqvirtual","1234",23));
         System.out.println(doctorService.createDoctor("Jhon Prada","1035","jhon@uq", "12345"));
 
         authenticationModule.addPatient(patientService.checkPatient("1034").get());
+        //System.out.prpatientService.checkPatient("1034").get().getId();
         System.out.println("1");
         authenticationModule.addDoctor(doctorService.checkDoctor("1035").get());
         System.out.println("2");

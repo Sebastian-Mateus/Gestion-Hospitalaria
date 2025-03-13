@@ -4,5 +4,6 @@ module co.edu.uniquindio.poo.gestionhospitalaria {
 
 
     opens co.edu.uniquindio.poo.gestionhospitalaria.viewController to javafx.fxml;
+    opens co.edu.uniquindio.poo.gestionhospitalaria.model to javafx.base;
     exports co.edu.uniquindio.poo.gestionhospitalaria;
 }
