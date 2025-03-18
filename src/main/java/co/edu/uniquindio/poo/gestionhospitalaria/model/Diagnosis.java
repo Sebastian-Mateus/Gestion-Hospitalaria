@@ -16,12 +16,7 @@ public class Diagnosis {
 
     @Override
     public String toString() {
-        return "Diagnosis{" +
-                "id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", severity='" + severity + '\'' +
-                '}';
+        return name;
     }
 
     public String getId() {

@@ -6,11 +6,13 @@ import java.util.LinkedList;
 public class MedicalRecordDetail implements Prototype {
 
     private LocalDate date;
+    private String notes;
     private LinkedList <Medication> medicationList;
     private LinkedList <Diagnosis> diagnosisList;
     private Appointment appointment;
 
-    public MedicalRecordDetail(LocalDate date, String id, Appointment appointment) {
+    public MedicalRecordDetail(LocalDate date, String notes, String id, Appointment appointment) {
+        this.notes = notes;
         this.date = date;
         this.appointment = appointment;
         this.medicationList = new LinkedList<>();
@@ -42,7 +44,7 @@ public class MedicalRecordDetail implements Prototype {
     @Override
     public String toString() {
         return "MedicalRecordDetail{" +
-                "date='" + date + '\'' +
+                "date='" + date  +
                 ", medicationList=" + medicationList +
                 ", diagnosisList=" + diagnosisList +
                 ", appointment=" + appointment +

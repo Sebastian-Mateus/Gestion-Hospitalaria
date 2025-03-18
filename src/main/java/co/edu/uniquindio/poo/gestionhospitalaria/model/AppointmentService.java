@@ -32,7 +32,6 @@ public class AppointmentService {
     public boolean bookAppointment(Appointment appointment, Patient patient) {
         if(!checkAppointmetForPatient(appointment, patient)) {
             availableAppointments.remove(appointment);
-            appointment.getDoctor().saveReservedAppointments(appointment);
             appointment.setPatient(patient);
             patient.getAppointments().add(appointment);
             appointment.setStatus(AppointmentStatus.UNPAID);

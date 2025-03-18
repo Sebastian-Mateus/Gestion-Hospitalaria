@@ -21,7 +21,13 @@ public class Doctor extends Person{
     }
 
     public void completeAppointment(Appointment appointment) {
+        appointment.setStatus(AppointmentStatus.FINISHED);
         reservedAppointments.remove(appointment);
+    }
+
+    public void updateInfo(String name, String email){
+        this.setName(name);
+        this.setEmail(email);
     }
 
     public void setReservedAppointments(LinkedList<Appointment> reservedAppointments) {

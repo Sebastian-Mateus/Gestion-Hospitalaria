@@ -4,10 +4,10 @@ public class Medication {
 
     private final String id;
     private final String name;
-    private final double dosage;
+    private final String dosage;
     private final String laboratory;
 
-    public Medication(String id, String name, double dosage, String laboratory) {
+    public Medication(String id, String name, String dosage, String laboratory) {
         this.id = id;
         this.name = name;
         this.dosage = dosage;
@@ -22,7 +22,7 @@ public class Medication {
         return name;
     }
 
-    public double getDosage() {
+    public String getDosage() {
         return dosage;
     }
 
@@ -32,11 +32,6 @@ public class Medication {
 
     @Override
     public String toString() {
-        return "Medication{" +
-                "id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                ", dosage=" + dosage +
-                ", laboratory='" + laboratory + '\'' +
-                '}';
+        return name + " - " + dosage;
     }
 }

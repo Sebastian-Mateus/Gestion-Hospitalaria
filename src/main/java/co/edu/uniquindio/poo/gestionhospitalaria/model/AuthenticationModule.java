@@ -17,7 +17,6 @@ public class AuthenticationModule {
 
     public Person authenticate(String user, String password) {
         // Verificar en pacientes
-        System.out.println(patientsCredentials.get(password).getName());
         if (patientsCredentials.containsKey(password)) {
             System.out.println("Usuario encontrado");
             if (patientsCredentials.get(password).getId().equals(user)) {
@@ -37,15 +36,15 @@ public class AuthenticationModule {
         return null;
     }
 
-    public boolean addPatient(Patient patient) {
+    public void addPatient(Patient patient) {
         System.out.println("Guardando paciente "+ patient.getPassword()+patient.getId());
         if(!hasCredentialsPatients(patient)){
         patientsCredentials.put(patient.getPassword(), patient);
         System.out.println("3");
-        return true;
+
     }else{
             System.out.println("5");
-            return false;
+
         }
     }
 

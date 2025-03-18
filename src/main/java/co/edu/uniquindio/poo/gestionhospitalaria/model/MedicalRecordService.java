@@ -38,6 +38,10 @@ public class MedicalRecordService {
         medicalRecords.put(patientId, record);
     }
 
+    public void addMedicalDetail(String id, MedicalRecordDetail detail) {
+        getMedicalRecord(id).addMedicalDetail(detail);
+    }
+
     /**
      * Method that verifies the existence of a medical record
      * @param patientId The id is used to verify it there is a medical record associated to that it
@@ -70,6 +74,8 @@ public class MedicalRecordService {
         }
 
     }
+
+
 
 
 

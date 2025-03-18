@@ -2,10 +2,12 @@ package co.edu.uniquindio.poo.gestionhospitalaria.viewController;
 
 import co.edu.uniquindio.poo.gestionhospitalaria.App;
 import co.edu.uniquindio.poo.gestionhospitalaria.controller.AuthenticationModuleController;
+import co.edu.uniquindio.poo.gestionhospitalaria.model.Doctor;
 import co.edu.uniquindio.poo.gestionhospitalaria.model.Patient;
 import co.edu.uniquindio.poo.gestionhospitalaria.model.Person;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
@@ -20,8 +22,8 @@ public class AuthenticationModuleViewController {
     private App app;
 
     @FXML
-    public void initialize() {
-        authenticationModuleController = new AuthenticationModuleController(app.hospital);
+    public void initialize(AuthenticationModuleController authenticationModuleController) {
+        this.authenticationModuleController = authenticationModuleController;
     }
 
 
@@ -40,12 +42,12 @@ public class AuthenticationModuleViewController {
                 System.out.println("Paciente encontrado");
             } else {
                 // Usuario es un doctor, cargar la vista de doctor
-                //loadDoctorView();
+                app.openDoctorServiceView((Doctor) user);
                 System.out.println("Doctor encontrado");
             }
         } else {
             // Si la autenticación falla, se muestra un mensaje de error
-            //showLoginError();
+            app.showAlert("Atención", "Usuario no encontrado", Alert.AlertType.WARNING);
             System.out.println("Usuario no encontrado");
         }
     }
@@ -62,5 +64,13 @@ public class AuthenticationModuleViewController {
 
     public void setApp(App app) {
         this.app = app;
+    }
+
+    public AuthenticationModuleController getAuthenticationModuleController() {
+        return authenticationModuleController;
+    }
+
+    public void setAuthenticationModuleController(AuthenticationModuleController authenticationModuleController) {
+        this.authenticationModuleController = authenticationModuleController;
     }
 }

@@ -77,8 +77,8 @@ public class PatientServiceViewController {
 
 
     @FXML
-    private void initialize() {
-        patientServiceController = new PatientServiceController(app.hospital);
+    public void initialize(PatientServiceController patientServiceController) {
+        this.patientServiceController = patientServiceController;
 
     }
 
@@ -91,16 +91,13 @@ public class PatientServiceViewController {
     void loadAvailableAppointments(ActionEvent event) {
         LocalDate selectedDate = chooseDate.getValue();
         if (selectedDate != null) {
-            List<Appointment> availableAppointments = new LinkedList<>();
             LinkedList<Doctor> doctors = patientServiceController.getDoctorService().getDoctorsList();
-            availableAppointments.addAll(patientServiceController.getAppointmentService().generateAvailableAppointments (doctors, selectedDate));
-
-            ObservableList<Appointment> observableAppointments = FXCollections.observableList(availableAppointments);
-            this.availableAppointmentsToBook = observableAppointments;
+            this.availableAppointmentsToBook = FXCollections.observableList(
+                    patientServiceController.getAppointmentService().generateAvailableAppointments(doctors, selectedDate));
             loadAvailableAppointmentsTable();
             System.out.println("Fecha seleccionada: " + selectedDate);
         } else {
-            showAlert("Atención", "No se ha seleccionado ninguna fecha.", Alert.AlertType.WARNING);
+            app.showAlert("Atención", "No se ha seleccionado ninguna fecha.", Alert.AlertType.WARNING);
         }
 
     }
@@ -125,10 +122,10 @@ public class PatientServiceViewController {
         if(selectedAppointment != null) {
             boolean booked = patientServiceController.bookAppointment(selectedAppointment, patient);
             if(booked) {
-                showAlert("Atención", "La cita ha sido agendada.", Alert.AlertType.CONFIRMATION);
+                app.showAlert("Atención", "La cita ha sido agendada.", Alert.AlertType.CONFIRMATION);
             }
         }else{
-            showAlert("Atención", "No se ha seleccionado ninguna cita.", Alert.AlertType.WARNING);
+            app.showAlert("Atención", "No se ha seleccionado ninguna cita.", Alert.AlertType.WARNING);
         }
 
 
@@ -141,7 +138,7 @@ public class PatientServiceViewController {
                 patientServiceController.completeAppointment(selectedAppointment, AppointmentStatus.CANCELED);
                 updateTable(event);
             } else {
-                showAlert("Atención", "No se ha seleccionado ninguna cita.", Alert.AlertType.WARNING);
+                app.showAlert("Atención", "No se ha seleccionado ninguna cita.", Alert.AlertType.WARNING);
             }
 
         }
@@ -152,14 +149,14 @@ public class PatientServiceViewController {
             Appointment selectedAppointment = appointmentsTable.getSelectionModel().getSelectedItem();
             if (selectedAppointment != null) {
                 if (selectedAppointment.getStatus() == AppointmentStatus.CANCELED) {
-                    showAlert("Atención", "No puede pagar una cita cancelada.", Alert.AlertType.WARNING);
+                    app.showAlert("Atención", "No puede pagar una cita cancelada.", Alert.AlertType.WARNING);
                 }else{
                     patientServiceController.payAppointment(selectedAppointment);
                     updateTable(event); // Refrescar la tabla para reflejar el cambio
                 }
 
             } else {
-                showAlert("Atención", "No se ha seleccionado ninguna cita.", Alert.AlertType.WARNING);
+                app.showAlert("Atención", "No se ha seleccionado ninguna cita.", Alert.AlertType.WARNING);
             }
         }
 
@@ -207,11 +204,17 @@ public class PatientServiceViewController {
             loadInfo();
         }
 
-    private void showAlert(String title, String message, Alert.AlertType alertType) {
+
+        /*
+        private void showAlert(String title, String message, Alert.AlertType alertType) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
     }
+
+         */
+
+
 }

@@ -9,6 +9,7 @@ public class Hospital {
     MedicalRecordService medicalRecordService;
     HospitalConfig hospitalConfing = HospitalConfig.getInstance();
     AuthenticationModule authenticationModule ;
+    MedicationDiagnosisService medicationDiagnosisService;
 
     public Hospital( ) {
         this.patientService = new PatientService();
@@ -17,19 +18,34 @@ public class Hospital {
         this.medicalRecordService = new MedicalRecordService();
         this.hospitalConfing = HospitalConfig.getHospitalConfig();
         this.authenticationModule= new AuthenticationModule();
+        this.medicationDiagnosisService = new MedicationDiagnosisService();
         loadData();
     }
 
     public void loadData(){
-        System.out.println(patientService.createPatient("Juan Perez", "1034","juan@uqvirtual","1234",23));
-        System.out.println(doctorService.createDoctor("Jhon Prada","1035","jhon@uq", "12345"));
+        patientService.createPatient("Juan","Perez", "1034","juan@uqvirtual","1234",23);
+        doctorService.createDoctor("Jhon Prada","1035","jhon@uq", "12345");
 
         authenticationModule.addPatient(patientService.checkPatient("1034").get());
-        //System.out.prpatientService.checkPatient("1034").get().getId();
-        System.out.println("1");
         authenticationModule.addDoctor(doctorService.checkDoctor("1035").get());
-        System.out.println("2");
 
+        medicationDiagnosisService.createDiagnosis("Diabetes", "Enfermedad crónica que afecta el metabolismo de la glucosa", "Alta");
+        medicationDiagnosisService.createDiagnosis("Hipertensión", "Presión arterial elevada crónica", "Media");
+        medicationDiagnosisService.createDiagnosis("Gripe", "Infección viral común", "Baja");
+
+        medicationDiagnosisService.createMedication("Losartan", "50mg", "Genfar");
+        medicationDiagnosisService.createMedication("Ibuprofeno", "400mg", "Bayer");
+        medicationDiagnosisService.createMedication("Metformina", "850mg", "Merck");
+
+    }
+
+
+    public MedicationDiagnosisService getMedicationDiagnosisService() {
+        return medicationDiagnosisService;
+    }
+
+    public void setMedicationDiagnosisService(MedicationDiagnosisService medicationDiagnosisService) {
+        this.medicationDiagnosisService = medicationDiagnosisService;
     }
 
     public AuthenticationModule getAuthenticationModule() {

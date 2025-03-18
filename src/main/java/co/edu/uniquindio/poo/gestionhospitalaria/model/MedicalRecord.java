@@ -25,6 +25,9 @@ public class MedicalRecord implements Prototype {
             throw new RuntimeException("Cloning not supported", e);
         }
     }
+    public void addMedicalDetail(MedicalRecordDetail detail) {
+        details.add(detail);
+    }
 
     public String getPatientId() {
         return patientId;

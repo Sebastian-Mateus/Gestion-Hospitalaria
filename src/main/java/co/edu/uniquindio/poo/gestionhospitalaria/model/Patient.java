@@ -5,14 +5,14 @@ import java.util.LinkedList;
 public class Patient extends Person implements Prototype {
 
     private int age;
-
+    private String lastName;
     private MedicalRecord medicalRecord;
     private LinkedList<Appointment> appointments;
 
-    public Patient(String name, String id, String email, String password, int age) {
+    public Patient(String name, String lastName, String id, String email, String password, int age) {
         super(name, id, email, password);
         this.age = age;
-
+        this.lastName = lastName;
         this.appointments = new LinkedList<>();
         this.medicalRecord = new MedicalRecord(id);
     }
@@ -29,11 +29,25 @@ public class Patient extends Person implements Prototype {
         }
     }
 
+    public void updateInfo(String name, String email, int age, String lastName) {
+        super.setName(name);
+        super.setEmail(email);
+        this.age = age;
+        this.lastName = lastName;
+    }
     @Override
     public String toString() {
         return "Patient{" +
                 "age=" + age +
                 '}';
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public MedicalRecord getMedicalRecord() {
